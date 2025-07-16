@@ -2,6 +2,8 @@ package fr.wijin.crm.servlet;
 
 import java.io.IOException;
 
+import fr.wijin.crm.dao.CustomerDAOCollection;
+import fr.wijin.crm.dao.ICustomerDAO;
 import fr.wijin.crm.model.Customer;
 import fr.wijin.crm.service.FormService;
 import jakarta.servlet.ServletException;
@@ -14,6 +16,7 @@ public class CustomerServlet extends AppServlet {
 
 	private static final long serialVersionUID = 7423961403387736524L;
 	private static FormService formService = new FormService();
+	private ICustomerDAO customerDAO = CustomerDAOCollection.getInstance();
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,40 +32,41 @@ public class CustomerServlet extends AppServlet {
 		String mail = request.getParameter("mail");
 		String notes = request.getParameter("notes");
 
-		String message;
+		String message = "Client créé avec succès !";
 		Customer customer = new Customer();
-		
+
 		/*
 		 * Initialisation du message à afficher : si un des champs obligatoires du
 		 * formulaire n'est pas renseigné, alors on affiche un message d'erreur, sinon
 		 * on affiche un message de succès
 		 */
-		if (!formService.estPresent(lastname) || !formService.estPresent(company) || !formService.estPresent(phone) || !formService.estPresent(mail)) {
+		if (!formService.estPresent(lastname) || !formService.estPresent(company) || !formService.estPresent(phone)
+				|| !formService.estPresent(mail)) {
 			message = "Erreur - Vous n'avez pas rempli tous les champs obligatoires. <br> <a href=\"/crm/createCustomer\">Cliquez ici</a> pour accéder au formulaire de création d'un client.";
 		} else {
-			message = "Client créé avec succès !";
 
-					/*
-		 * Création du bean Client et initialisation avec les données récupérées
-		 */
+			/*
+			 * Création du bean Client et initialisation avec les données récupérées
+			 */
 
-		customer.setLastname(lastname);
-		customer.setFirstname(firstname);
-		customer.setCompany(company);
-		customer.setPhone(phone);
-		customer.setMobile(mobile);
-		customer.setMail(mail);
-		customer.setNotes(notes);
-		customer.setActive(true);
+			customer.setLastname(lastname);
+			customer.setFirstname(firstname);
+			customer.setCompany(company);
+			customer.setPhone(phone);
+			customer.setMobile(mobile);
+			customer.setMail(mail);
+			customer.setNotes(notes);
+			customer.setActive(true);
+
+			customerDAO.createCustomer(customer);
 		}
-
 
 		/* Ajout du bean et du message à l'objet requête */
 		request.setAttribute("customer", customer);
 		request.setAttribute("message", message);
 
 		/* Transmission à la page JSP en charge de l'affichage des données */
-		this.redirectToJSP(request, response, "/createCustomer.jsp");
+		this.redirectToJSP(request, response, "/viewCustomer.jsp");
 	}
 
 	@Override
