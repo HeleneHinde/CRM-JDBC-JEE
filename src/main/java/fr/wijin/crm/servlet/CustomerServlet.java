@@ -2,7 +2,7 @@ package fr.wijin.crm.servlet;
 
 import java.io.IOException;
 
-import fr.wijin.crm.dao.CustomerDAOCollection;
+import fr.wijin.crm.dao.DAOFactory;
 import fr.wijin.crm.dao.ICustomerDAO;
 import fr.wijin.crm.model.Customer;
 import fr.wijin.crm.service.FormService;
@@ -16,7 +16,7 @@ public class CustomerServlet extends AppServlet {
 
 	private static final long serialVersionUID = 7423961403387736524L;
 	private static FormService formService = new FormService();
-	private ICustomerDAO customerDAO = CustomerDAOCollection.getInstance();
+	private ICustomerDAO customerDAO = DAOFactory.getCustomerDAO();
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
