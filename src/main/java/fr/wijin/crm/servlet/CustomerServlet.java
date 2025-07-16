@@ -3,6 +3,7 @@ package fr.wijin.crm.servlet;
 import java.io.IOException;
 
 import fr.wijin.crm.model.Customer;
+import fr.wijin.crm.service.FormService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CustomerServlet extends AppServlet {
 
 	private static final long serialVersionUID = 7423961403387736524L;
+	private static FormService formService = new FormService();
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +37,7 @@ public class CustomerServlet extends AppServlet {
 		 * formulaire n'est pas renseigné, alors on affiche un message d'erreur, sinon
 		 * on affiche un message de succès
 		 */
-		if (lastname.trim().isEmpty() || company.trim().isEmpty() || phone.trim().isEmpty() || mail.trim().isEmpty()) {
+		if (!formService.estPresent(lastname) || !formService.estPresent(company) || !formService.estPresent(phone) || !formService.estPresent(mail)) {
 			message = "Erreur - Vous n'avez pas rempli tous les champs obligatoires. <br> <a href=\"/crm/createCustomer\">Cliquez ici</a> pour accéder au formulaire de création d'un client.";
 		} else {
 			message = "Client créé avec succès !";
