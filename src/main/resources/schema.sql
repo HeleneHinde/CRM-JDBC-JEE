@@ -3,14 +3,14 @@ DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS customers;
 
 CREATE TABLE customers(id SERIAL NOT NULL, 
-								lastname VARCHAR(100), 
-                                firstname VARCHAR(100),
-                                company VARCHAR(200),
-                                mail VARCHAR(255),
-                                phone VARCHAR(15),
+								lastname VARCHAR(100) NOT NULL, 
+                                firstname VARCHAR(100) NOT NULL,
+                                company VARCHAR(200) NOT NULL,
+                                mail VARCHAR(255) NOT NULL,
+                                phone VARCHAR(15) NOT NULL,
                                 mobile VARCHAR(15),
                                 notes VARCHAR(255),
-                                active BOOLEAN,
+                                active BOOLEAN DEFAULT TRUE,
                                 PRIMARY KEY (id));
 
 CREATE TABLE orders(id SERIAL NOT NULL,
