@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class OrderServlet extends HttpServlet {
+public class OrderServlet extends AppServlet {
 
 	private static final long serialVersionUID = 7232896601780995455L;
 
