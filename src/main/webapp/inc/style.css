@@ -25,6 +25,22 @@ form label {
 form input {
     margin: 3px 3px 0px 0px;
     border: 1px #c0c0c0 solid;
+    padding: 5px;
+}
+
+form select {
+    margin: 3px 3px 0px 0px;
+    border: 1px #c0c0c0 solid;
+    padding: 5px;
+    background: white;
+    min-width: 200px;
+}
+
+form textarea {
+    margin: 3px 3px 0px 0px;
+    border: 1px #c0c0c0 solid;
+    padding: 5px;
+    resize: vertical;
 }
 
 form input.sansLabel {
