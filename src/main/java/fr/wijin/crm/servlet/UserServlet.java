@@ -18,26 +18,6 @@ public class UserServlet extends AppServlet {
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		 * Récupération des données saisies, envoyées en tant que paramètres de la
-		 * requête GET
-		 */
-		// TODO
-
-		/*
-		 * Initialisation du message à afficher : si un des champs obligatoires du
-		 * formulaire n'est pas renseigné, alors on affiche un message d'erreur, sinon
-		 * on affiche un message de succès
-		 */
-		// TODO
-
-		/*
-		 * Création du bean Client et initialisation avec les données récupérées
-		 */
-		// TODO
-
-		/* Ajout du bean et du message à l'objet requête */
-		// TODO
 
 		/* Transmission à la page JSP en charge de l'affichage des données */
 		this.redirectToJSP(request, response, "/createUser.jsp");
@@ -54,7 +34,7 @@ public class UserServlet extends AppServlet {
 		String mail = request.getParameter("mail");
 		String grants = request.getParameter("grants");
 
-		String message;
+		String message = "Utilisateur créé avec succès !";
 		User user = new User();
 
 		/*
@@ -62,10 +42,9 @@ public class UserServlet extends AppServlet {
 		 * formulaire n'est pas renseigné, alors on affiche un message d'erreur, sinon
 		 * on affiche un message de succès
 		 */
-		if (formService.estPresent(username) || !formService.estPresent(password) || !formService.estPresent(mail)) {
+		if (!formService.estPresent(username) || !formService.estPresent(password) || !formService.estPresent(mail)) {
 			message = "Erreur - Vous n'avez pas rempli tous les champs obligatoires. <br> <a href=\"/crm/createUser\">Cliquez ici</a> pour accéder au formulaire de création d'un utilisateur.";
 		} else {
-			message = "Utilisateur créé avec succès !";
 
 			/*
 			 * Création du bean Utilisateur et initialisation avec les données récupérées

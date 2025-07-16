@@ -13,25 +13,30 @@ public class OrderServlet extends AppServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// Récupération des données saisies
-		// TODO
+		this.redirectToJSP(request, response, "/createOrder.jsp");
+	}
 
+	@Override
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
-		 * Initialisation du message à afficher : si un des champs obligatoires du
-		 * formulaire n'est pas renseigné, alors on affiche un message d'erreur, sinon
-		 * on affiche un message de succès
+		 * Récupération des données saisies, envoyées en tant que paramètres de la
+		 * requête POST
 		 */
-		// TODO
+		String orderId = request.getParameter("orderId");
+		String customerId = request.getParameter("customerId");
+		String label = request.getParameter("label");	
+		int adrEt = Integer.parseInt(request.getParameter("adrEt"));
+		int numberOfDays = Integer.parseInt(request.getParameter("numberOfDays"));
+		int tva = Integer.parseInt(request.getParameter("tva"));
+		String status = getInitParameter("status");
+		String type = getInitParameter("type");
+		String notes = request.getParameter("notes");
 
-		// Création des beans Customer et Order et initialisation avec les données
-		// récupérées
-		// TODO
+		
 
-		// Ajout du bean Order et du message à l'objet requête
-		// TODO
 
-		// Transmission à la page JSP en charge de l'affichage des données
-		// TODO
+
+		this.redirectToJSP(request, response, "/viewOrder.jsp");
 	}
 
 }
