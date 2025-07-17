@@ -4,7 +4,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
-    <title>${pageTitle != null ? pageTitle : 'CRM - Gestion des clients'}</title>
+    <title><c:out value="${pageTitle != null ? pageTitle : 'CRM - Gestion des clients'}"/></title>
     <link type="text/css" rel="stylesheet" href="inc/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
