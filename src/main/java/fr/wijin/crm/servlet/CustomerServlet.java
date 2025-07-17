@@ -1,8 +1,6 @@
 package fr.wijin.crm.servlet;
 
 import java.io.IOException;
-import java.util.Random;
-
 import fr.wijin.crm.dao.DAOFactory;
 import fr.wijin.crm.dao.ICustomerDAO;
 import fr.wijin.crm.model.Customer;
@@ -57,7 +55,7 @@ public class CustomerServlet extends AppServlet {
 			customer.setMail(mail);
 			customer.setNotes(notes);
 			customer.setActive(true);
-			customer.setId(new Random().nextInt(10000)); //TODO: Use a better ID generation strategy
+			// customer.setId(new Random().nextInt(10000)); 
 			System.out.println("Creating customer: " + customer.toString());
 
 			customerDAO.createCustomer(customer);
