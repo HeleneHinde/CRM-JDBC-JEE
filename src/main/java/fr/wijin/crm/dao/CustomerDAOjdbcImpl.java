@@ -3,6 +3,7 @@ package fr.wijin.crm.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.wijin.crm.dao.database.DatabaseConnection;
@@ -11,6 +12,10 @@ import fr.wijin.crm.model.Customer;
 public class CustomerDAOjdbcImpl implements ICustomerDAO {
 
     private final String CREATE_CUSTOMER = "INSERT INTO customers (lastname, firstname,company, mail, phone) VALUES (?, ?, ?, ?, ?)";
+    private final String GET_CUSTOMER_BY_ID = "SELECT * FROM customers WHERE id = ?";
+    private final String UPDATE_CUSTOMER = "UPDATE customers SET lastname = ?, firstname = ?, company = ?, mail = ?, phone = ? WHERE id = ?";
+    private final String DELETE_CUSTOMER = "DELETE FROM customers WHERE id = ?";
+    private final String GET_ALL_CUSTOMERS = "SELECT * FROM customers";
 
     private static CustomerDAOjdbcImpl instance;
 
@@ -75,8 +80,26 @@ public class CustomerDAOjdbcImpl implements ICustomerDAO {
 
     @Override
     public List<Customer> getAllCustomers() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllCustomers'");
+        List<Customer> customers = new ArrayList<>();
+        try (Connection cnx = DatabaseConnection.getConnection()) {
+            PreparedStatement pstmt = cnx.prepareStatement(GET_ALL_CUSTOMERS);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Customer customer = new Customer();
+                    customer.setId(rs.getInt("id"));
+                    customer.setLastname(rs.getString("lastname"));
+                    customer.setFirstname(rs.getString("firstname"));
+                    customer.setCompany(rs.getString("company"));
+                    customer.setMail(rs.getString("mail"));
+                    customer.setPhone(rs.getString("phone"));
+                    customers.add(customer);
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error getting all customers", e);
+        }
+        return customers;
     }
 
 }

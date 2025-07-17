@@ -54,12 +54,12 @@
 			</c:if>
 			
 			<!-- Calcul du total -->
-			<div class="order-summary">
+<!-- 			<div class="order-summary">
 				<h3>Résumé financier</h3>
 				<p><strong>Montant HT :</strong> <c:out value="${order.adrEt * order.numberOfDays}" />€</p>
 				<p><strong>TVA :</strong> <c:out value="${(order.adrEt * order.numberOfDays) * (order.tva / 100)}" />€</p>
 				<p class="total"><strong>Total TTC :</strong> <c:out value="${(order.adrEt * order.numberOfDays) * (1 + order.tva / 100)}" />€</p>
-			</div>
+			</div> -->
 		</div>
 	</c:if>
 	
