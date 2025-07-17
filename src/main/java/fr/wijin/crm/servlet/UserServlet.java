@@ -14,8 +14,6 @@ public class UserServlet extends AppServlet {
 
 	private static final long serialVersionUID = 3327502512201809201L;
 
-	private static FormService formService = new FormService();
-
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -42,7 +40,7 @@ public class UserServlet extends AppServlet {
 		 * formulaire n'est pas renseigné, alors on affiche un message d'erreur, sinon
 		 * on affiche un message de succès
 		 */
-		if (!formService.estPresent(username) || !formService.estPresent(password) || !formService.estPresent(mail)) {
+		if (!FormService.estPresent(username) || !FormService.estPresent(password) || !FormService.estPresent(mail)) {
 			message = "Erreur - Vous n'avez pas rempli tous les champs obligatoires. <br> <a href=\"/crm/createUser\">Cliquez ici</a> pour accéder au formulaire de création d'un utilisateur.";
 		} else {
 
