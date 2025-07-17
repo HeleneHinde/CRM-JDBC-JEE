@@ -18,7 +18,7 @@ public class UserServlet extends AppServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		/* Transmission à la page JSP en charge de l'affichage des données */
-		this.redirectToJSP(request, response, "/createUser.jsp");
+		this.redirectToJSP(request, response, "/WEB-INF/createUser.jsp");
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class UserServlet extends AppServlet {
 		request.setAttribute("message", message);
 
 		/* Transmission à la page JSP en charge de l'affichage des données */
-		this.redirectToJSP(request, response, "/viewUser.jsp");
+		this.redirectToJSP(request, response, "/WEB-INF/viewUser.jsp");
 
 	}
 

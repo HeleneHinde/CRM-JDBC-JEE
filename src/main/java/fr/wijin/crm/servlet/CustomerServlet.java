@@ -68,13 +68,13 @@ public class CustomerServlet extends AppServlet {
 		request.setAttribute("message", message);
 
 		/* Transmission à la page JSP en charge de l'affichage des données */
-		this.redirectToJSP(request, response, "/viewCustomer.jsp");
+		this.redirectToJSP(request, response, "/WEB-INF/viewCustomer.jsp");
 	}
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Redirection vers la page de création de client */
-		this.redirectToJSP(request, response, "/createCustomer.jsp");
+		this.redirectToJSP(request, response, "/WEB-INF/createCustomer.jsp");
 	}
 
 }

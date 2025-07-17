@@ -27,7 +27,7 @@ public class OrderServlet extends AppServlet {
 		// Charger la liste des customers pour le select
 		loadCustomersForSelect(request);
 
-		this.redirectToJSP(request, response, "/createOrder.jsp");
+		this.redirectToJSP(request, response, "/WEB-INF/createOrder.jsp");
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class OrderServlet extends AppServlet {
 		request.setAttribute("order", order);
 		request.setAttribute("message", message);
 
-		this.redirectToJSP(request, response, "/viewOrder.jsp");
+		this.redirectToJSP(request, response, "/WEB-INF/viewOrder.jsp");
 	}
 
 }
