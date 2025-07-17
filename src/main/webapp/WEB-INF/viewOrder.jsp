@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 
 <c:set var="pageTitle" value="Visualisation d'une commande" />
-<%@ include file="inc/header.jsp" %>
+<%@ include file="/inc/header.jsp" %>
 
 <div>
     <h1>Commande n° <c:out value="${order.id}"/> du client : <c:out value="${order.customer.lastname}" /> <c:out value="${order.customer.firstname}" /></h1>
@@ -75,4 +75,4 @@
 	</div>
 </div>
 
-<%@ include file="inc/footer.jsp" %>
+<%@ include file="/inc/footer.jsp" %>

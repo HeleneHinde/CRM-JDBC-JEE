@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8"%>
 
 <c:set var="pageTitle" value="Création d'un utilisateur" />
-<%@ include file="inc/header.jsp" %>
+<%@ include file="/inc/header.jsp" %>
 
 	<div>
 		<h1>Créer un nouvel utilisateur</h1>
@@ -45,4 +45,4 @@
 			</form>
 	</div>
 
-<%@ include file="inc/footer.jsp" %>
+<%@ include file="/inc/footer.jsp" %>

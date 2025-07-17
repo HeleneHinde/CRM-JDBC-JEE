@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 
 <c:set var="pageTitle" value="Visualisation d'un client" />
-<%@ include file="inc/header.jsp" %>
+<%@ include file="/inc/header.jsp" %>
 
 <div>
     <c:if test="${not empty customer}">
@@ -56,4 +56,4 @@
     </div>
 </div>
 
-<%@ include file="inc/footer.jsp" %>
+<%@ include file="/inc/footer.jsp" %>

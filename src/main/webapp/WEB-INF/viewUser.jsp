@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 
 <c:set var="pageTitle" value="Visualisation d'un utilisateur" />
-<%@ include file="inc/header.jsp" %>
+<%@ include file="/inc/header.jsp" %>
 
 <div>
     <h1>Utilisateur : <c:out value="${user.username}" /></h1>
@@ -69,4 +69,4 @@
     </div>
 </div>
 
-<%@ include file="inc/footer.jsp" %>
+<%@ include file="/inc/footer.jsp" %>
