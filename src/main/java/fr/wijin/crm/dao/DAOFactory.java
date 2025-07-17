@@ -6,4 +6,8 @@ public class DAOFactory {
         return CustomerDAOCollection.getInstance();
     }
 
+    public static IOrderDAO getOrderDAO() {
+        return OrderDAOCollection.getInstance();
+    }
+
 }
