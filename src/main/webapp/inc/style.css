@@ -98,3 +98,86 @@ div#menu{
 div#corps{
 	margin: 10px;
 }
+
+/* Navigation --------------------------------------------------------------------------------------- */
+header {
+    background: #0080ff;
+    color: white;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.nav-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-menu li {
+    margin: 0 15px;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.nav-menu a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Footer --------------------------------------------------------------------------------------- */
+footer {
+    background: #f0f0f0;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    border-top: 1px solid #ddd;
+}
+
+/* Main Content --------------------------------------------------------------------------------------- */
+main {
+    min-height: 60vh;
+    padding: 0 20px;
+}
+
+/* Titles --------------------------------------------------------------------------------------- */
+h1 {
+    color: #0080ff;
+    font-size: 24px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #0080ff;
+    padding-bottom: 10px;
+}
+
+h2 {
+    color: #0080ff;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Responsive --------------------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .nav-menu li {
+        margin: 5px 0;
+    }
+    
+    main {
+        padding: 0 10px;
+    }
+}
