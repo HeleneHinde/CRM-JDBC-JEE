@@ -1,21 +1,17 @@
 <%@ page pageEncoding="UTF-8" %>
-	<!DOCTYPE html>
-	<html lang="fr">
 
-	<head>
-		<meta charset="utf-8" />
-		<title>Affichage d'un utilisateur</title>
-		<link type="text/css" rel="stylesheet" href="inc/style.css" />
-	</head>
+<c:set var="pageTitle" value="Visualisation d'un utilisateur" />
+<%@ include file="inc/header.jsp" %>
 
-	<body>
+<div>
+    <h1>Client : ${user.username}</h1>
 		<%-- Affichage de la chaîne "message" transmise par la servlet --%>
 			<p class="info">${message}</p>
 			<%-- Puis affichage des données enregistrées dans le bean "customer" transmis par la servlet --%>
-				<p>Nom : ${user.username}</p>
-				<p>Prénom : ${user.password}</p>
+				<p>Nom d'utilisateur : ${user.username}</p>
+				<p>Mot de passe : ${user.password}</p>
 				<p>Email : ${user.mail}</p>
-				<p>Notes : ${user.grants}</p>
+				<p>Droits : ${user.grants}</p>
 	</body>
 
 	</html>
