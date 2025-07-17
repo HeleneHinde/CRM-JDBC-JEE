@@ -106,7 +106,7 @@ public class Customer implements Serializable {
 		this.notes = notes;
 	}
 
-	public Boolean isActive() {
+	public Boolean getActive() {
 		return active;
 	}
 
