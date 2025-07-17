@@ -43,6 +43,10 @@ public class CustomerDAOCollection implements ICustomerDAO {
 
     @Override
     public Customer getCustomerById(Integer id) {
+        if (id == null) {
+            throw new IllegalArgumentException("ID cannot be null");
+        }
+
         return customers.stream()
                 .filter(customer -> customer.getId().equals(id))
                 .findFirst()
@@ -65,11 +69,13 @@ public class CustomerDAOCollection implements ICustomerDAO {
 
     @Override
     public void deleteCustomer(Integer id) {
-        Customer existingCustomer = getCustomerById(id);
-        if (existingCustomer == null) {
+        if (id == null) {
+            throw new IllegalArgumentException("ID cannot be null");
+        }
+        boolean removed = customers.removeIf(c -> c.getId().equals(id));
+        if (!removed) {
             throw new IllegalArgumentException("Customer with ID " + id + " does not exist.");
         }
-        customers.remove(existingCustomer);
     }
 
     @Override
