@@ -12,7 +12,7 @@
 	<p>Numéro de commande : ${order.id}</p>
 	<p>Client : ${order.customer.lastname} ${order.customer.firstname}</p>
 	<p>Label : ${order.label}</p>
-	<p>Coût journalier : ${order.adreEt}</p>
+	<p>Coût journalier : ${order.adrEt}</p>
 	<p>Nombre de jour : ${order.numberOfDays}</p>
 	<p>TVA : ${order.tva}</p>
 	<p>Status : ${order.status}</p>

@@ -23,8 +23,8 @@
 					<label for="label">Label </label>
 					<input type="text" id="label" name="label" value="" size="50" maxlength="100" required />
 					<br />
-					<label for="adreEt">Prix journalier <span class="required">*</span></label>
-					<input type="number" id="adreEt" name="adreEt" value="" min="0" required />
+					<label for="adrEt">Prix journalier <span class="required">*</span></label>
+					<input type="number" id="adrEt" name="adrEt" value="" min="0" required />
 					<br />
 					<label for="numberOfDays">Nombre de jours <span class="required">*</span></label>
 					<input type="number" id="numberOfDays" name="numberOfDays" value="" min="1" step="0.5" required />
