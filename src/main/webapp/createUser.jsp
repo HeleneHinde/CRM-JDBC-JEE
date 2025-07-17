@@ -1,16 +1,14 @@
 <%@ page pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="utf-8" />
-<title>Création d'un utilisateur</title>
-<link type="text/css" rel="stylesheet" href="inc/style.css" />
-</head>
-<body>
+
+<c:set var="pageTitle" value="Création d'un utilisateur" />
+<%@ include file="inc/header.jsp" %>
+
 	<div>
+		<h1>Créer un nouvel utilisateur</h1>
+		
 		<form method="post" action="createUser">
 				<fieldset>
-					<legend>Informations client</legend>
+					<legend>Informations utilisateur</legend>
 
 					<label for="username">Nom d'utilisateur <span class="required">*</span></label>
 					<input type="text" id="username" name="username" value="" size="30" maxlength="25" required/>
@@ -25,9 +23,9 @@
 					<input type="text" id="grants" name="grants" size="20" maxlength="20">
 					<br />
 				</fieldset>
-				<input class="submitButton" type="submit" value="Valider" /> <input class="resetButton" type="reset"
-					value="Remettre à zéro" /> <br />
+				<input class="submitButton" type="submit" value="Créer l'utilisateur" />
+				<input class="resetButton" type="reset" value="Remettre à zéro" />
 			</form>
 	</div>
-</body>
-</html>
+
+<%@ include file="inc/footer.jsp" %>

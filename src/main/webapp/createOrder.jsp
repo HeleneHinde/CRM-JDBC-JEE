@@ -1,16 +1,11 @@
 <%@ page pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-	<!DOCTYPE html>
-	<html lang="fr">
 
-	<head>
-		<meta charset="utf-8" />
-		<title>Création d'une commande</title>
-		<link type="text/css" rel="stylesheet" href="inc/style.css" />
-	</head>
+<c:set var="pageTitle" value="Création d'une commande" />
+<%@ include file="inc/header.jsp" %>
 
-	<body>
 		<div>
+			<h1>Créer une nouvelle commande</h1>
+			
 			<form method="post" action="createOrder">
 				<fieldset>
 					<legend>Informations commande</legend>
@@ -53,10 +48,9 @@
 					<textarea id="notes" name="notes" rows="4" cols="60" maxlength="200"></textarea>
 					<br />
 				</fieldset>
-				<input class="submitButton" type="submit" value="Valider" /> <input class="resetButton" type="reset"
-					value="Remettre à zéro" /> <br />
+				<input class="submitButton" type="submit" value="Créer la commande" />
+				<input class="resetButton" type="reset" value="Remettre à zéro" />
 			</form>
 		</div>
-	</body>
 
-	</html>
+<%@ include file="inc/footer.jsp" %>

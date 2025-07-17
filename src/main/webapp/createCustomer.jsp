@@ -1,18 +1,14 @@
 <%@ page pageEncoding="UTF-8" %>
-	<!DOCTYPE html>
-	<html lang="fr">
 
-	<head>
-		<meta charset="utf-8" />
-		<title>Création d'un client</title>
-		<link type="text/css" rel="stylesheet" href="inc/style.css" />
-	</head>
+<c:set var="pageTitle" value="Création d'un client" />
+<%@ include file="inc/header.jsp" %>
 
-	<body>
-		<div>
-			<form method="post" action="createCustomer">
-				<fieldset>
-					<legend>Informations utilisateur</legend>
+<div>
+    <h1>Créer un nouveau client</h1>
+    
+    <form method="post" action="createCustomer">
+        <fieldset>
+            <legend>Informations client</legend>
 
 					<label for="lastname">Nom <span class="required">*</span></label>
 					<input type="text" id="lastname" name="lastname" value="" size="50" maxlength="100" required/>
@@ -36,10 +32,9 @@
 					<textarea id="notes" name="notes" rows="4" cols="60" maxlength="200"></textarea>
 					<br />
 				</fieldset>
-				<input class="submitButton" type="submit" value="Valider" /> <input class="resetButton" type="reset"
-					value="Remettre à zéro" /> <br />
+				<input class="submitButton" type="submit" value="Créer le client" />
+				<input class="resetButton" type="reset" value="Remettre à zéro" />
 			</form>
 		</div>
-	</body>
 
-	</html>
+<%@ include file="inc/footer.jsp" %>
