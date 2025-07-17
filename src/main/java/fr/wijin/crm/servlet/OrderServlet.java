@@ -8,6 +8,7 @@ import fr.wijin.crm.dao.ICustomerDAO;
 import fr.wijin.crm.dao.IOrderDAO;
 import fr.wijin.crm.model.Customer;
 import fr.wijin.crm.model.Order;
+import fr.wijin.crm.service.FormService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,35 +32,60 @@ public class OrderServlet extends AppServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// Charger la liste des customers pour le select
+		loadCustomersForSelect(request);
+
 		/*
 		 * Récupération des données saisies, envoyées en tant que paramètres de la
 		 * requête POST
 		 */
-		int customerId = Integer.parseInt(request.getParameter("customerId"));
-		String label = request.getParameter("label");	
-		Double adrEt = Double.valueOf(request.getParameter("adrEt"));
-		Double numberOfDays = Double.valueOf(request.getParameter("numberOfDays"));
-		Double tva = Double.valueOf(request.getParameter("tva"));
-		String status = getInitParameter("status");
-		String type = getInitParameter("type");
+		int customerId = FormService.toInteger(request.getParameter("customer"));
+		String label = request.getParameter("label");
+		Double adrEt = FormService.toDouble(request.getParameter("adrEt"));
+		Double numberOfDays = FormService.toDouble(request.getParameter("numberOfDays"));
+		Double tva = FormService.toDouble(request.getParameter("tva"));
+		String status = request.getParameter("status");
+		String type = request.getParameter("type");
 		String notes = request.getParameter("notes");
 
-		Customer customer = customerDAO.getCustomerById(customerId);
-
-		// Créer la commande avec les données récupérées
+		String message = "Félicitation pour cette commande !";
+		// create order
 		Order order = new Order();
-		order.setId(new Random().nextInt(10000)); //TODO: Use a better ID generation strategy
-		order.setCustomer(customer);
-		order.setLabel(label);
-		order.setAdrEt(adrEt);
-		order.setNumberOfDays(numberOfDays);
-		order.setTva(tva);
-		order.setStatus(status);
-		order.setType(type);
-		order.setNotes(notes);
 
-		// Enregistrer la commande dans la base de données
-		orderDAO.createOrder(order);
+		if (!FormService.estPresent(label) || adrEt == null
+				|| numberOfDays == null || tva == null
+				|| !FormService.estPresent(status) || !FormService.estPresent(type)) {
+
+			message = "Le formulaire est mal renseigné."
+					+ " <a href=\"createOrder.jsp\">Réessayer</a>";
+		} else {
+
+			Customer customer = new Customer();
+			try {
+				customer = customerDAO.getCustomerById(customerId);
+				order.setCustomer(customer);
+			} catch (IllegalArgumentException e) {
+				request.setAttribute("error", e.getMessage());
+				this.redirectToJSP(request, response, "/createOrder.jsp");
+				return;
+			}
+			order.setId(new Random().nextInt(10000)); // TODO: Use a better ID generation strategy
+			order.setLabel(label);
+			order.setAdrEt(adrEt);
+			order.setNumberOfDays(numberOfDays);
+			order.setTva(tva);
+			order.setStatus(status);
+			order.setType(type);
+			order.setNotes(notes);
+
+			// Enregistrer la commande dans la base de données
+			orderDAO.createOrder(order);
+		}
+
+		// Ajout du bean Order et du message à l'objet requête
+		request.setAttribute("order", order);
+		request.setAttribute("message", message);
 
 		this.redirectToJSP(request, response, "/viewOrder.jsp");
 	}
