@@ -38,11 +38,11 @@ public class CustomerServlet extends AppServlet {
 		 * formulaire n'est pas renseigné, alors on affiche un message d'erreur, sinon
 		 * on affiche un message de succès
 		 */
+		String lien = null;
 		if (!FormService.estPresent(lastname) || !FormService.estPresent(company) || !FormService.estPresent(phone)
 				|| !FormService.estPresent(mail)) {
-			message = "Erreur - Vous n'avez pas rempli tous les champs obligatoires. <br> <a href=\"/crm/createCustomer\">Cliquez ici</a> pour accéder au formulaire de création d'un client.";
-		} else {
-
+			message = "Erreur - Vous n'avez pas rempli tous les champs obligatoires";
+			lien = "/crm/createCustomer"
 			/*
 			 * Création du bean Client et initialisation avec les données récupérées
 			 */
@@ -64,6 +64,7 @@ public class CustomerServlet extends AppServlet {
 		/* Ajout du bean et du message à l'objet requête */
 		request.setAttribute("customer", customer);
 		request.setAttribute("message", message);
+		request.setAttribute("lien", lien)
 
 		/* Transmission à la page JSP en charge de l'affichage des données */
 		this.redirectToJSP(request, response, "/WEB-INF/viewCustomer.jsp");

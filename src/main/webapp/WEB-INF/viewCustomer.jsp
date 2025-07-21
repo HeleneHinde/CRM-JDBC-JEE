@@ -10,6 +10,8 @@
         <c:if test="${not empty message}">
             <div class="message ${fn:startsWith(message, 'Erreur') ? 'error' : 'success'}">
                 <c:out value="${message}" />
+                Pour acceder au formulaire de création d'un client
+                <a href="<c:url value ='${lien}'/>">Cliquez ici </a>
             </div>
         </c:if>
         
