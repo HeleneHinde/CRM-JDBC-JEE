@@ -6,15 +6,15 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = 1221366484235490734L;
 
-	private Integer id;
+	protected  Integer id;
 
-	private String username;
+	protected String username;
 
-	private String password;
+	protected String password;
 
-	private String mail;
+	protected String mail;
 
-	private String grants;
+	protected String grants;
 
 	public User() {
 		super();

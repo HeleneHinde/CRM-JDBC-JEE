@@ -6,9 +6,9 @@
 <div>
     <h1>Utilisateur : <c:out value="${user.username}" /></h1>
     
-    <c:if test="${not empty message}">
-        <div class="message ${fn:startsWith(message, 'Erreur') ? 'error' : 'success'}">
-            <c:out value="${message}" />
+    <c:if test="${not empty user.message}">
+        <div class="user.message ${fn:startsWith(user.message, 'Erreur') ? 'error' : 'success'}">
+            <c:out value="${user.message}" />
         </div>
     </c:if>
     
@@ -42,18 +42,6 @@
                     </c:otherwise>
                 </c:choose>
             </p>
-            <c:if test="${not empty user.active}">
-                <p><strong>Statut :</strong> 
-                    <c:choose>
-                        <c:when test="${user.active}">
-                            <span class="status-active">Actif</span>
-                        </c:when>
-                        <c:otherwise>
-                            <span class="status-inactive">Inactif</span>
-                        </c:otherwise>
-                    </c:choose>
-                </p>
-            </c:if>
         </div>
     </c:if>
     

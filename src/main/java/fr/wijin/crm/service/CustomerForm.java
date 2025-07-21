@@ -1,9 +1,16 @@
 package fr.wijin.crm.service;
 
-public class FormService {
+import fr.wijin.crm.model.Customer;
+
+public class CustomerForm extends Customer{
 
 	public static boolean estPresent(String chaine) {
 		return chaine != null && !chaine.trim().isEmpty();
+	}
+
+	public void validate() {
+		
+		// Méthode vide pour l'instant, peut être utilisée pour des validations futures
 	}
 
 	public static Double toDouble(String valeur) {

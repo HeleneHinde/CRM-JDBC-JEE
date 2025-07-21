@@ -8,7 +8,7 @@ import fr.wijin.crm.dao.ICustomerDAO;
 import fr.wijin.crm.dao.IOrderDAO;
 import fr.wijin.crm.model.Customer;
 import fr.wijin.crm.model.Order;
-import fr.wijin.crm.service.FormService;
+import fr.wijin.crm.service.CustomerForm;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,11 +40,11 @@ public class OrderServlet extends AppServlet {
 		 * Récupération des données saisies, envoyées en tant que paramètres de la
 		 * requête POST
 		 */
-		int customerId = FormService.toInteger(request.getParameter("customer"));
+		int customerId = CustomerForm.toInteger(request.getParameter("customer"));
 		String label = request.getParameter("label");
-		Double adrEt = FormService.toDouble(request.getParameter("adrEt"));
-		Double numberOfDays = FormService.toDouble(request.getParameter("numberOfDays"));
-		Double tva = FormService.toDouble(request.getParameter("tva"));
+		Double adrEt = CustomerForm.toDouble(request.getParameter("adrEt"));
+		Double numberOfDays = CustomerForm.toDouble(request.getParameter("numberOfDays"));
+		Double tva = CustomerForm.toDouble(request.getParameter("tva"));
 		String status = request.getParameter("status");
 		String type = request.getParameter("type");
 		String notes = request.getParameter("notes");
@@ -53,9 +53,9 @@ public class OrderServlet extends AppServlet {
 		// create order
 		Order order = new Order();
 
-		if (!FormService.estPresent(label) || adrEt == null
+		if (!CustomerForm.estPresent(label) || adrEt == null
 				|| numberOfDays == null || tva == null
-				|| !FormService.estPresent(status) || !FormService.estPresent(type)) {
+				|| !CustomerForm.estPresent(status) || !CustomerForm.estPresent(type)) {
 
 			message = "Le formulaire est mal renseigné."
 					+ " <a href=\"createOrder.jsp\">Réessayer</a>";

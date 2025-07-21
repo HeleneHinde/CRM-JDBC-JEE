@@ -4,7 +4,7 @@ import java.io.IOException;
 import fr.wijin.crm.dao.DAOFactory;
 import fr.wijin.crm.dao.ICustomerDAO;
 import fr.wijin.crm.model.Customer;
-import fr.wijin.crm.service.FormService;
+import fr.wijin.crm.service.CustomerForm;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -54,8 +54,8 @@ public class CustomerServlet extends AppServlet {
 		 * on affiche un message de succès
 		 */
 		String lien = null;
-		if (!FormService.estPresent(lastname) || !FormService.estPresent(company) || !FormService.estPresent(phone)
-				|| !FormService.estPresent(mail)) {
+		if (!CustomerForm.estPresent(lastname) || !CustomerForm.estPresent(company) || !CustomerForm.estPresent(phone)
+				|| !CustomerForm.estPresent(mail)) {
 			message = "Erreur - Vous n'avez pas rempli tous les champs obligatoires";
 			lien = "/createCustomer";
 			request.setAttribute("customer", customer);
