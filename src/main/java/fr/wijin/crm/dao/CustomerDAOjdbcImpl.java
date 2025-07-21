@@ -30,7 +30,6 @@ public class CustomerDAOjdbcImpl implements ICustomerDAO {
         return instance;
     }
 
-
     @Override
     public Customer createCustomer(Customer customer) {
         try (Connection cnx = DatabaseConnection.getConnection()) {
@@ -43,7 +42,7 @@ public class CustomerDAOjdbcImpl implements ICustomerDAO {
             pstmt.setString(5, customer.getPhone());
 
             int rowsAffected = pstmt.executeUpdate();
-            
+
             if (rowsAffected > 0) {
                 try (ResultSet rs = pstmt.getGeneratedKeys()) {
                     if (rs.next()) {
@@ -62,8 +61,28 @@ public class CustomerDAOjdbcImpl implements ICustomerDAO {
 
     @Override
     public Customer getCustomerById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCustomerById'");
+
+        try (Connection cnx = DatabaseConnection.getConnection()) {
+            PreparedStatement pstmt = cnx.prepareStatement(GET_CUSTOMER_BY_ID);
+            pstmt.setInt(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    Customer customer = new Customer();
+                    customer.setId(rs.getInt("id"));
+                    customer.setLastname(rs.getString("lastname"));
+                    customer.setFirstname(rs.getString("firstname"));
+                    customer.setCompany(rs.getString("company"));
+                    customer.setMail(rs.getString("mail"));
+                    customer.setPhone(rs.getString("phone"));
+                    return customer;
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error getting customer by ID", e);
+        }
+
+        return null;
     }
 
     @Override
