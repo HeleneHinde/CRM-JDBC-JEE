@@ -1,4 +1,4 @@
-package fr.wijin.crm.service;
+package fr.wijin.crm.form;
 
 import fr.wijin.crm.model.User;
 import jakarta.servlet.http.HttpServletRequest;

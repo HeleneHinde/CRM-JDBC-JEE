@@ -2,7 +2,7 @@ package fr.wijin.crm.servlet;
 
 import java.io.IOException;
 
-import fr.wijin.crm.service.UserForm;
+import fr.wijin.crm.form.UserForm;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
