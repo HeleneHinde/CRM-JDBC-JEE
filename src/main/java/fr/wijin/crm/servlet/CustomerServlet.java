@@ -9,6 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/createCustomer")
 public class CustomerServlet extends AppServlet {
@@ -32,7 +33,21 @@ public class CustomerServlet extends AppServlet {
 
 		String message = "Client créé avec succès !";
 		Customer customer = new Customer();
+		/*
+		 * Création du bean Client et initialisation avec les données récupérées
+		 */
 
+		customer.setLastname(lastname);
+		customer.setFirstname(firstname);
+		customer.setCompany(company);
+		customer.setPhone(phone);
+		customer.setMobile(mobile);
+		customer.setMail(mail);
+		customer.setNotes(notes);
+		customer.setActive(true);
+
+		HttpSession session = request.getSession();
+		session.setAttribute("customer", customer);
 		/*
 		 * Initialisation du message à afficher : si un des champs obligatoires du
 		 * formulaire n'est pas renseigné, alors on affiche un message d'erreur, sinon
@@ -42,29 +57,21 @@ public class CustomerServlet extends AppServlet {
 		if (!FormService.estPresent(lastname) || !FormService.estPresent(company) || !FormService.estPresent(phone)
 				|| !FormService.estPresent(mail)) {
 			message = "Erreur - Vous n'avez pas rempli tous les champs obligatoires";
-			lien = "/crm/createCustomer"
-			/*
-			 * Création du bean Client et initialisation avec les données récupérées
-			 */
+			lien = "/createCustomer";
+			request.setAttribute("customer", customer);
+			request.setAttribute("message", message);
+			request.setAttribute("lien", lien);
+			this.redirectToJSP(request, response, "/WEB-INF/createCustomer.jsp");
+			return;
 
-			customer.setLastname(lastname);
-			customer.setFirstname(firstname);
-			customer.setCompany(company);
-			customer.setPhone(phone);
-			customer.setMobile(mobile);
-			customer.setMail(mail);
-			customer.setNotes(notes);
-			customer.setActive(true);
-			// customer.setId(new Random().nextInt(10000)); 
-			System.out.println("Creating customer: " + customer.toString());
-
+		} else {
 			customerDAO.createCustomer(customer);
 		}
 
 		/* Ajout du bean et du message à l'objet requête */
 		request.setAttribute("customer", customer);
 		request.setAttribute("message", message);
-		request.setAttribute("lien", lien)
+		request.setAttribute("lien", lien);
 
 		/* Transmission à la page JSP en charge de l'affichage des données */
 		this.redirectToJSP(request, response, "/WEB-INF/viewCustomer.jsp");
@@ -72,6 +79,14 @@ public class CustomerServlet extends AppServlet {
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
+
+		Customer customer = (Customer) session.getAttribute("customer");
+		if (customer != null) {
+			request.setAttribute("customer", customer);
+		}
+
 		/* Redirection vers la page de création de client */
 		this.redirectToJSP(request, response, "/WEB-INF/createCustomer.jsp");
 	}

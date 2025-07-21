@@ -15,6 +15,7 @@
                 <li><a href="/crm/createCustomer">Créer un client</a></li>
                 <li><a href="/crm/createOrder">Créer une commande</a></li>
                 <li><a href="/crm/createUser">Créer un utilisateur</a></li>
+                <li><a href="/crm/logout">Se déconnecter</a></li>
             </ul>
         </nav>
     </header>
