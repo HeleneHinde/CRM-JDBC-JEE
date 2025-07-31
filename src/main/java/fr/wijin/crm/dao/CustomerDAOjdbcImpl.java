@@ -11,11 +11,11 @@ import fr.wijin.crm.model.Customer;
 
 public class CustomerDAOjdbcImpl implements ICustomerDAO {
 
-    private final String CREATE_CUSTOMER = "INSERT INTO customers (lastname, firstname,company, mail, phone) VALUES (?, ?, ?, ?, ?)";
-    private final String GET_CUSTOMER_BY_ID = "SELECT * FROM customers WHERE id = ?";
-    private final String UPDATE_CUSTOMER = "UPDATE customers SET lastname = ?, firstname = ?, company = ?, mail = ?, phone = ? WHERE id = ?";
-    private final String DELETE_CUSTOMER = "DELETE FROM customers WHERE id = ?";
-    private final String GET_ALL_CUSTOMERS = "SELECT * FROM customers";
+    private final String CREATE_CUSTOMER = "INSERT INTO customer (lastname, firstname,company, mail, phone) VALUES (?, ?, ?, ?, ?)";
+    private final String GET_CUSTOMER_BY_ID = "SELECT * FROM customer WHERE id = ?";
+    private final String UPDATE_CUSTOMER = "UPDATE customer SET lastname = ?, firstname = ?, company = ?, mail = ?, phone = ? WHERE id = ?";
+    private final String DELETE_CUSTOMER = "DELETE FROM customer WHERE id = ?";
+    private final String GET_ALL_CUSTOMERS = "SELECT * FROM customer";
 
     private static CustomerDAOjdbcImpl instance;
 
