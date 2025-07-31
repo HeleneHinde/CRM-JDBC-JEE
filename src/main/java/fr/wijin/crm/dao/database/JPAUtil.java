@@ -13,10 +13,6 @@ public class JPAUtil {
             System.out.println("🚀 Initialisation de JPA...");
             entityManagerFactory = Persistence.createEntityManagerFactory("crmPersistenceUnit");
             System.out.println("✅ EntityManagerFactory créé avec succès !");
-            
-            // Test de connexion immédiat
-            testConnection();
-            
         } catch (Exception e) {
             System.err.println("❌ Erreur lors de l'initialisation JPA : " + e.getMessage());
             e.printStackTrace();
@@ -24,32 +20,32 @@ public class JPAUtil {
         }
     }
     
+    /**
+     * Retourne un nouvel EntityManager
+     * N'oubliez pas de le fermer après utilisation !
+     */
     public static EntityManager getEntityManager() {
+        if (entityManagerFactory == null) {
+            throw new RuntimeException("EntityManagerFactory non initialisé");
+        }
         return entityManagerFactory.createEntityManager();
     }
     
-    private static void testConnection() {
-        try (EntityManager em = getEntityManager()) {
-            // Force l'initialisation de la connexion et la création des tables
-            em.getTransaction().begin();
-            em.createNativeQuery("SELECT 1").getSingleResult();
-            em.getTransaction().commit();
-            System.out.println("✅ Test de connexion JPA réussi !");
-        } catch (Exception e) {
-            System.err.println("❌ Test de connexion JPA échoué : " + e.getMessage());
-            throw e;
-        }
-    }
-    
-    public static void closeEntityManagerFactory() {
+    /**
+     * Ferme l'EntityManagerFactory
+     * À appeler lors de l'arrêt de l'application
+     */
+    public static void close() {
         if (entityManagerFactory != null && entityManagerFactory.isOpen()) {
             entityManagerFactory.close();
-            System.out.println("EntityManagerFactory fermé");
+            System.out.println("✅ EntityManagerFactory fermé");
         }
     }
     
-    // Méthode pour forcer l'initialisation
-    public static void initialize() {
-        System.out.println("JPAUtil initialisé");
+    /**
+     * Vérifie si JPA est correctement initialisé
+     */
+    public static boolean isInitialized() {
+        return entityManagerFactory != null && entityManagerFactory.isOpen();
     }
 }
