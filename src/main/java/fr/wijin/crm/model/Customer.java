@@ -32,7 +32,7 @@ public class Customer implements Serializable {
 
 	private String notes;
 
-	private Boolean active;
+	private Boolean active = true;
 
 	@OneToMany(mappedBy = "customer")
 	private List<Order> orders;
