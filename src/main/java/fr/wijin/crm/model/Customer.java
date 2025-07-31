@@ -1,11 +1,21 @@
 package fr.wijin.crm.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class Customer implements Serializable {
 
 	private static final long serialVersionUID = 3290415979633588092L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String lastname;
@@ -23,6 +33,9 @@ public class Customer implements Serializable {
 	private String notes;
 
 	private Boolean active;
+
+	@OneToMany(mappedBy = "customer")
+	private List<Order> orders;
 
 	public Customer() {
 		super();
@@ -112,6 +125,14 @@ public class Customer implements Serializable {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
 	@Override

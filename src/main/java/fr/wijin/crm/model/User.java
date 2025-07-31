@@ -2,10 +2,18 @@ package fr.wijin.crm.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1221366484235490734L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected  Integer id;
 
 	protected String username;
