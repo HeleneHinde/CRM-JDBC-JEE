@@ -6,15 +6,21 @@ import fr.wijin.crm.dao.ICustomerDAO;
 import fr.wijin.crm.dao.database.JPAUtil;
 import fr.wijin.crm.model.Customer;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Persistence;
 
 public class CustomerDAOJPA implements ICustomerDAO {
 
     private static CustomerDAOJPA instance;
-    private EntityManager em = Persistence.createEntityManagerFactory("crmPersistenceUnit").createEntityManager();
+    private final EntityManager em;
+    private boolean shouldCloseEM = true;
 
-    private CustomerDAOJPA() {
-        // Constructeur privé pour le singleton
+    CustomerDAOJPA() {
+        em = JPAUtil.getEntityManager();
+        shouldCloseEM = true;
+    }
+
+    public CustomerDAOJPA(EntityManager em) {
+        this.em = em;
+        shouldCloseEM = false;
     }
 
     public static synchronized CustomerDAOJPA getInstance() {
@@ -26,7 +32,7 @@ public class CustomerDAOJPA implements ICustomerDAO {
 
     @Override
     public Customer createCustomer(Customer customer) {
-        
+
         try {
             em.getTransaction().begin();
             em.persist(customer);
@@ -38,7 +44,9 @@ public class CustomerDAOJPA implements ICustomerDAO {
             }
             throw new RuntimeException("Erreur création customer", e);
         } finally {
-            em.close();
+            if (shouldCloseEM) {
+                em.close();
+            }
         }
     }
 
@@ -48,7 +56,9 @@ public class CustomerDAOJPA implements ICustomerDAO {
         try {
             return em.find(Customer.class, id);
         } finally {
-            em.close();
+            if (shouldCloseEM) {
+                em.close();
+            }
         }
     }
 
@@ -57,9 +67,11 @@ public class CustomerDAOJPA implements ICustomerDAO {
 
         try {
             return em.createQuery("SELECT c FROM Customer c ORDER BY c.lastname", Customer.class)
-                     .getResultList();
+                    .getResultList();
         } finally {
-            em.close();
+            if (shouldCloseEM) {
+                em.close();
+            }
         }
     }
 
@@ -77,7 +89,9 @@ public class CustomerDAOJPA implements ICustomerDAO {
             }
             throw new RuntimeException("Erreur mise à jour customer", e);
         } finally {
-            em.close();
+            if (shouldCloseEM) {
+                em.close();
+            }
         }
     }
 
@@ -97,7 +111,9 @@ public class CustomerDAOJPA implements ICustomerDAO {
             }
             throw new RuntimeException("Erreur suppression customer", e);
         } finally {
-            em.close();
+            if (shouldCloseEM) {
+                em.close();
+            }
         }
     }
 }
