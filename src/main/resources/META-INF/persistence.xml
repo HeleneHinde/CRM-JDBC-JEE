@@ -5,6 +5,43 @@
              http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
 
+ <persistence-unit name="crmTestPersistenceUnit">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
+        <!-- Classes d'entités -->
+        <class>fr.wijin.crm.model.Customer</class>
+        <class>fr.wijin.crm.model.Order</class>
+        <class>fr.wijin.crm.model.User</class>
+        
+        <properties>
+            <!-- Configuration H2 en mémoire -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"/>
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            
+            <!-- Configuration Hibernate pour H2 -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            
+            <!-- Affichage SQL pour debug des tests -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+            <!-- ✅ FORCER LES NOMS DE TABLES AVEC QUOTES POUR H2 -->
+            <property name="hibernate.globally_quoted_identifiers" value="true"/>
+    
+            
+            <!-- Noms de tables/colonnes -->
+            <property name="hibernate.physical_naming_strategy" value="org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl"/>
+            <property name="hibernate.implicit_naming_strategy" value="org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl"/>
+            
+            <!-- Optimisations pour tests -->
+            <property name="hibernate.connection.pool_size" value="1"/>
+            <property name="hibernate.connection.autocommit" value="false"/>
+        </properties>
+    </persistence-unit>
+
     <persistence-unit name="crmPersistenceUnit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         
